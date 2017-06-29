@@ -1,16 +1,15 @@
 package formatter
 
 import (
-	"github.com/ngonghi/VyLog"
-
 	"fmt"
+	"github.com/ngonghi/VyLog/common"
 )
 
 type LineFormatter struct {
 	AbstractFormatter
 }
 
-func (lf LineFormatter) Format(message *VyLog.Message) string {
+func (lf LineFormatter) Format(message *common.Message) string {
 	return fmt.Sprintf(lf.getLogFormat(), message.GetTime().Format(lf.GetDateFormat()), message.GetLevelName(), message.GetMessage())
 }
 

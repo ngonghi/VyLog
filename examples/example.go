@@ -1,14 +1,19 @@
 package main
 
 import (
-	"github.com/ngonghi/VyLog"
-	"time"
-
 	"github.com/ngonghi/VyLog/handler"
+	"github.com/ngonghi/VyLog"
 )
 
 func main()  {
-	m := &VyLog.Message {Level : 1, LevelName : "tEST", Message : "test", Time : time.Now()}
 	l := &handler.ConsoleHandler{}
-	l.Handle(m)
+	v := &VyLog.Vylog{}
+	v.AddHandler(l)
+	
+	v.Trace("TEST")
+	v.Debug("TEST")
+	v.Info("TEST")
+	v.Warn("TEST")
+	v.Error("TEST")
+	v.Fatal("TEST")
 }

@@ -1,9 +1,11 @@
 package formatter
 
-import "github.com/ngonghi/VyLog"
+import (
+	"github.com/ngonghi/VyLog/common"
+)
 
 type Formatter interface {
-	Format(message *VyLog.Message) string
+	Format(message *common.Message) string
 }
 
 type AbstractFormatter struct {

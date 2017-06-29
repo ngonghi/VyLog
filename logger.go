@@ -1,6 +1,10 @@
 package VyLog
 
-import "time"
+import (
+	"time"
+	"github.com/ngonghi/VyLog/handler"
+	"github.com/ngonghi/VyLog/common"
+)
 
 const (
 	TRACE = iota
@@ -13,40 +17,86 @@ const (
 
 type LoggerInterface interface {
 
-	Trace(string, ...interface{})
+	Trace(string)
 
-	Debug(string, ...interface{})
+	Debug(string)
 
-	Info(string, ...interface{})
+	Info(string)
 
-	Warn(string, ...interface{})
+	Warn(string)
 
-	Error(string, ...interface{})
+	Error(string)
 
-	Fatal(string, ...interface{})
+	Fatal(string)
 
-	Log(int, string, ...interface{})
+	log(int, string)
 }
 
-type Message struct {
-	Level int
-	LevelName string
-	Message string
-	Time time.Time
+type Vylog struct {
+	handlers []handler.Handler
 }
 
-func (msg *Message) GetLevel() int {
-	return msg.Level
+func (log *Vylog) AddHandler(handlers ...handler.Handler) {
+	for _, handler := range handlers {
+		log.handlers = append(log.handlers, handler)
+	}
 }
 
-func (msg *Message) GetLevelName() string {
-	return msg.LevelName
+func (log *Vylog) log(level int, msg string) {
+	for _, handler := range log.handlers {
+		handler.Handle(log.createMessage(level, msg))
+	}
 }
 
-func (msg * Message) GetMessage() string  {
-	return msg.Message
+func (log *Vylog) createMessage(level int, msg string) *common.Message {
+	return &common.Message{
+		Level: level,
+		LevelName: log.getLevelName(level),
+		Message: msg,
+		Time: time.Now(),
+	}
 }
 
-func (msg * Message) GetTime() time.Time {
-	return msg.Time
+func (log *Vylog) getLevelName(level int) string {
+	
+	switch level {
+	case TRACE:
+		return "TRACE"
+	case DEBUG:
+		return "DEBUG"
+	case INFO:
+		return "INFO"
+	case WARN:
+		return "WARN"
+	case ERROR:
+		return "ERROR"
+	case FATAL:
+		return "FATAL"
+	}
+
+	return "UNKNOWN"
+}
+
+func (log *Vylog) Trace(msg string) {
+	log.log(TRACE, msg)
+}
+
+func (log *Vylog) Debug(msg string) {
+	log.log(DEBUG, msg)
+}
+
+func (log *Vylog) Info(msg string) {
+	log.log(INFO, msg)
+}
+
+func (log *Vylog) Warn(msg string) {
+	log.log(WARN, msg)
+}
+
+func (log *Vylog) Error(msg string) {
+	log.log(ERROR, msg)
+}
+
+func (log *Vylog) Fatal(msg string) {
+	log.log(FATAL, msg)
 }

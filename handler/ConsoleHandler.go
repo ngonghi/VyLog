@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"github.com/ngonghi/VyLog"
 	"io"
 	"os"
+	"github.com/ngonghi/VyLog/common"
 )
 
 type ConsoleHandler struct {
@@ -12,13 +12,13 @@ type ConsoleHandler struct {
 	out        io.WriteCloser
 }
 
-func (handler *ConsoleHandler) Handle(message *VyLog.Message) {
+func (handler *ConsoleHandler) Handle(message *common.Message) {
 	if handler.IsHandling(message) {
 		handler.Write(message)
 	}
 }
 
-func (handler * ConsoleHandler) Write(msg * VyLog.Message) {
+func (handler * ConsoleHandler) Write(msg *common.Message) {
 	buf := []byte{}
 	buf = append(buf, handler.GetFormatter().Format(msg)...)
 	handler.GetOutput().Write(buf)
