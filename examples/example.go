@@ -6,10 +6,16 @@ import (
 )
 
 func main()  {
-	l := &handler.ConsoleHandler{}
+	consoleHandler := handler.GetConsoleHandler()
+	fileHandler,err := handler.GetFileHandler("test", 0)
+
 	v := &VyLog.Vylog{}
-	v.AddHandler(l)
-	
+	v.AddHandler(consoleHandler)
+
+	if err == nil {
+		v.AddHandler(fileHandler)
+	}
+
 	v.Trace("TEST")
 	v.Debug("TEST")
 	v.Info("TEST")

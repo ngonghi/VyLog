@@ -12,6 +12,10 @@ type ConsoleHandler struct {
 	out        io.WriteCloser
 }
 
+func GetConsoleHandler() *ConsoleHandler {
+	return &ConsoleHandler{}
+}
+
 func (handler *ConsoleHandler) Handle(message *common.Message) {
 	if handler.IsHandling(message) {
 		handler.Write(message)

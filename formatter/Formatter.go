@@ -14,7 +14,7 @@ type AbstractFormatter struct {
 }
 
 func (f *AbstractFormatter) GetDefaultDateFormat() string {
-	return "2016-08-31 02:17:00"
+	return "2006-01-02 15:04:05"
 }
 
 func (f *AbstractFormatter) GetDateFormat() string {

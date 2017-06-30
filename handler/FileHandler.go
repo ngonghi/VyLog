@@ -8,7 +8,6 @@ import (
 
 const (
 	APPEND = iota
-	ROTATE
 )
 
 const (
@@ -23,9 +22,25 @@ type FileHandler struct {
 	mode     int
 	file     *os.File
 	filePath string
+}
 
-	maxRotateFile int
-	mustRotate bool
+func GetFileHandler(filePath string, mode int) (*FileHandler, error) {
+
+	var file *os.File
+	var err error
+
+	switch mode {
+	case APPEND:
+		file, err = os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
+	default:
+		return nil, fmt.Errorf("Can Open Log In This Mode: %d", mode)
+	}
+
+	if err != nil {
+		return nil, fmt.Errorf("Open log file error: %s", err)
+	}
+
+	return newHandler(file), nil
 }
 
 func (handler *FileHandler) SetMode(mode int) {
@@ -44,26 +59,24 @@ func (handler *FileHandler) SetFilePath(filePath string) {
 	handler.filePath = filePath
 }
 
-func (handler *FileHandler) GetFileLogger(filePath string, mode int, maxRotateFile int) (*FileHandler, error) {
-	var file *os.File
-	var err error
-
-	switch mode {
-	case APPEND:
-		file, err = os.OpenFile(f, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
-	case ROTATE:
-		return nil, fmt.Errorf("Invalid Log File Mode: %d", mode)
-	default:
-		return nil, fmt.Errorf("Can Open Log In This Mode: %d", mode)
+func newHandler(file *os.File) (h *FileHandler) {
+	h = &FileHandler{
+		msgQueue: make(chan *common.Message, BUFSIZE),
+		file: file,
 	}
-	
-	if err != nil {
-		return nil, fmt.Errorf("Open log file error: %s", err)
-	}
-
+	return
 }
 
-
+func (handler *FileHandler) startOutput() {
+	for {
+		m, ok := <-handler.msgQueue
+		if !ok {
+			handler.file.Sync()
+			return
+		}
+		handler.Write(m)
+	}
+}
 
 func (handler *FileHandler) Handle(message *common.Message) {
 	if handler.IsHandling(message) {
@@ -72,7 +85,7 @@ func (handler *FileHandler) Handle(message *common.Message) {
 }
 
 func (handler *FileHandler) Write(msg *common.Message) {
-
 	buf := []byte{}
 	buf = append(buf, handler.GetFormatter().Format(msg)...)
+	handler.file.Write(buf)
 }
