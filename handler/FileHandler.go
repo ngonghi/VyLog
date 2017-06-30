@@ -24,7 +24,7 @@ type FileHandler struct {
 	filePath string
 }
 
-func GetFileHandler(filePath string, mode int) (*FileHandler, error) {
+func GetFileHandler(filePath string,mode int) (*FileHandler, error) {
 
 	var file *os.File
 	var err error

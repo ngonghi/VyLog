@@ -16,12 +16,16 @@ type Handler interface {
 }
 
 type AbstractHandler struct {
-	level     int
-	formatter vFormatter.Formatter
+	Level     int
+	Formatter vFormatter.Formatter
 }
 
 func (handler *AbstractHandler) GetLevel() int {
-	return handler.level
+	return handler.Level
+}
+
+func (handler *AbstractHandler) SetLevel(level int) {
+	handler.Level = level
 }
 
 func (handler *AbstractHandler) IsHandling(msg *common.Message) bool {
@@ -29,16 +33,16 @@ func (handler *AbstractHandler) IsHandling(msg *common.Message) bool {
 }
 
 func (handler *AbstractHandler) SetFormatter(formatter vFormatter.Formatter) {
-	handler.formatter = formatter
+	handler.Formatter = formatter
 }
 
 func (handler *AbstractHandler) GetFormatter() vFormatter.Formatter {
 
-	if handler.formatter == nil {
+	if handler.Formatter == nil {
 		return handler.GetDefaultFormatter()
 	}
 
-	return handler.formatter
+	return handler.Formatter
 }
 
 func (handler *AbstractHandler) GetDefaultFormatter() vFormatter.LineFormatter {

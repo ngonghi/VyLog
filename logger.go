@@ -77,6 +77,26 @@ func (log *Vylog) getLevelName(level int) string {
 	return "UNKNOWN"
 }
 
+func GetLevelByName(levelName string) int {
+
+	switch levelName {
+	case "TRACE":
+		return TRACE
+	case "DEBUG":
+		return DEBUG
+	case "INFO":
+		return INFO
+	case "WARN":
+		return WARN
+	case "ERROR":
+		return ERROR
+	case "FATAL":
+		return FATAL
+	}
+	
+	return -1
+}
+
 func (log *Vylog) Trace(msg string) {
 	log.log(TRACE, msg)
 }
