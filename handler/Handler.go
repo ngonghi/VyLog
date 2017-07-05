@@ -8,7 +8,7 @@ import (
 type Handler interface {
 	IsHandling(message *common.Message) bool
 
-	Handle(message *common.Message)
+	Handle(message *common.Message) error
 
 	SetFormatter(formatter vFormatter.Formatter)
 

@@ -16,16 +16,21 @@ func GetConsoleHandler() *ConsoleHandler {
 	return &ConsoleHandler{}
 }
 
-func (handler *ConsoleHandler) Handle(message *common.Message) {
+func (handler *ConsoleHandler) Handle(message *common.Message) error {
 	if handler.IsHandling(message) {
-		handler.Write(message)
+		err := handler.Write(message)
+		return err
 	}
+
+	return nil
 }
 
-func (handler * ConsoleHandler) Write(msg *common.Message) {
+func (handler * ConsoleHandler) Write(msg *common.Message) error {
 	buf := []byte{}
 	buf = append(buf, handler.GetFormatter().Format(msg)...)
-	handler.GetOutput().Write(buf)
+	_, err := handler.GetOutput().Write(buf)
+
+	return err
 }
 
 func (handler * ConsoleHandler) GetOutput() io.WriteCloser {

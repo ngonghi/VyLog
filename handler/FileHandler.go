@@ -78,14 +78,19 @@ func (handler *FileHandler) startOutput() {
 	}
 }
 
-func (handler *FileHandler) Handle(message *common.Message) {
+func (handler *FileHandler) Handle(message *common.Message) error {
 	if handler.IsHandling(message) {
-		handler.Write(message)
+		err := handler.Write(message)
+		return err
 	}
+
+	return nil
 }
 
-func (handler *FileHandler) Write(msg *common.Message) {
+func (handler *FileHandler) Write(msg *common.Message) error {
 	buf := []byte{}
 	buf = append(buf, handler.GetFormatter().Format(msg)...)
-	handler.file.Write(buf)
+	_, err := handler.file.Write(buf)
+
+	return err
 }

@@ -6,15 +6,6 @@ import (
 	"github.com/ngonghi/VyLog/common"
 )
 
-const (
-	TRACE = iota
-	DEBUG
-	INFO
-	WARN
-	ERROR
-	FATAL
-)
-
 type LoggerInterface interface {
 
 	Trace(string)
@@ -58,19 +49,19 @@ func (log *Vylog) createMessage(level int, msg string) *common.Message {
 }
 
 func (log *Vylog) getLevelName(level int) string {
-	
+
 	switch level {
-	case TRACE:
+	case common.TRACE:
 		return "TRACE"
-	case DEBUG:
+	case common.DEBUG:
 		return "DEBUG"
-	case INFO:
+	case common.INFO:
 		return "INFO"
-	case WARN:
+	case common.WARN:
 		return "WARN"
-	case ERROR:
+	case common.ERROR:
 		return "ERROR"
-	case FATAL:
+	case common.FATAL:
 		return "FATAL"
 	}
 
@@ -81,42 +72,42 @@ func GetLevelByName(levelName string) int {
 
 	switch levelName {
 	case "TRACE":
-		return TRACE
+		return common.TRACE
 	case "DEBUG":
-		return DEBUG
+		return common.DEBUG
 	case "INFO":
-		return INFO
+		return common.INFO
 	case "WARN":
-		return WARN
+		return common.WARN
 	case "ERROR":
-		return ERROR
+		return common.ERROR
 	case "FATAL":
-		return FATAL
+		return common.FATAL
 	}
 	
 	return -1
 }
 
 func (log *Vylog) Trace(msg string) {
-	log.log(TRACE, msg)
+	log.log(common.TRACE, msg)
 }
 
 func (log *Vylog) Debug(msg string) {
-	log.log(DEBUG, msg)
+	log.log(common.DEBUG, msg)
 }
 
 func (log *Vylog) Info(msg string) {
-	log.log(INFO, msg)
+	log.log(common.INFO, msg)
 }
 
 func (log *Vylog) Warn(msg string) {
-	log.log(WARN, msg)
+	log.log(common.WARN, msg)
 }
 
 func (log *Vylog) Error(msg string) {
-	log.log(ERROR, msg)
+	log.log(common.ERROR, msg)
 }
 
 func (log *Vylog) Fatal(msg string) {
-	log.log(FATAL, msg)
+	log.log(common.FATAL, msg)
 }
