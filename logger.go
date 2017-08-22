@@ -4,6 +4,8 @@ import (
 	"time"
 	"github.com/ngonghi/VyLog/handler"
 	"github.com/ngonghi/VyLog/common"
+	"runtime"
+	"fmt"
 )
 
 type LoggerInterface interface {
@@ -89,11 +91,19 @@ func GetLevelByName(levelName string) int {
 }
 
 func (log *Vylog) Trace(msg string) {
-	log.log(common.TRACE, msg)
+
+	pc, fn, line, _ := runtime.Caller(1)
+	traceMsg := fmt.Sprintf("%s[%s:%d]%s",runtime.FuncForPC(pc).Name(), fn, line, msg)
+
+	log.log(common.TRACE, traceMsg)
 }
 
 func (log *Vylog) Debug(msg string) {
-	log.log(common.DEBUG, msg)
+
+	pc, fn, line, _ := runtime.Caller(1)
+	debugMsg := fmt.Sprintf("%s[%s:%d]%s",runtime.FuncForPC(pc).Name(), fn, line, msg)
+
+	log.log(common.DEBUG, debugMsg)
 }
 
 func (log *Vylog) Info(msg string) {
@@ -105,9 +115,17 @@ func (log *Vylog) Warn(msg string) {
 }
 
 func (log *Vylog) Error(msg string) {
-	log.log(common.ERROR, msg)
+
+	pc, fn, line, _ := runtime.Caller(1)
+	errorMsg := fmt.Sprintf("%s[%s:%d]%s",runtime.FuncForPC(pc).Name(), fn, line, msg)
+
+	log.log(common.ERROR, errorMsg)
 }
 
 func (log *Vylog) Fatal(msg string) {
-	log.log(common.FATAL, msg)
+
+	pc, fn, line, _ := runtime.Caller(1)
+	fatalMsg := fmt.Sprintf("%s[%s:%d]%s",runtime.FuncForPC(pc).Name(), fn, line, msg)
+
+	log.log(common.FATAL, fatalMsg)
 }
