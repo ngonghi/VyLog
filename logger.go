@@ -92,7 +92,7 @@ func GetLevelByName(levelName string) int {
 
 func (log *Vylog) Trace(msg string) {
 
-	pc, _, _, _ := runtime.Caller(0)
+	pc, _, _, _ := runtime.Caller(1)
 	traceMsg := fmt.Sprintf("%s: %s",runtime.FuncForPC(pc).Name(), msg)
 
 	log.log(common.TRACE, traceMsg)
@@ -100,7 +100,7 @@ func (log *Vylog) Trace(msg string) {
 
 func (log *Vylog) Debug(msg string) {
 
-	pc, _, _, _ := runtime.Caller(0)
+	pc, _, _, _ := runtime.Caller(1)
 	debugMsg := fmt.Sprintf("%s: %s",runtime.FuncForPC(pc).Name(), msg)
 
 	log.log(common.DEBUG, debugMsg)
@@ -116,7 +116,7 @@ func (log *Vylog) Warn(msg string) {
 
 func (log *Vylog) Error(msg string) {
 
-	pc, _, _, _ := runtime.Caller(0)
+	pc, _, _, _ := runtime.Caller(1)
 	errorMsg := fmt.Sprintf("%s: %s",runtime.FuncForPC(pc).Name(), msg)
 
 	log.log(common.ERROR, errorMsg)
@@ -124,7 +124,7 @@ func (log *Vylog) Error(msg string) {
 
 func (log *Vylog) Fatal(msg string) {
 
-	pc, _, _, _ := runtime.Caller(0)
+	pc, _, _, _ := runtime.Caller(1)
 	fatalMsg := fmt.Sprintf("%s: %s",runtime.FuncForPC(pc).Name(), msg)
 
 	log.log(common.FATAL, fatalMsg)

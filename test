@@ -1,0 +1,30 @@
+[2017-09-08 15:55:50] TRACE: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:23]TEST
+[2017-09-08 15:55:50] DEBUG: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:24]TEST
+[2017-09-08 15:55:50] INFO: TEST
+[2017-09-08 15:55:50] WARN: TEST
+[2017-09-08 15:55:50] ERROR: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:27]TEST
+[2017-09-08 15:55:50] FATAL: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:28]TEST
+[2017-09-08 15:56:41] TRACE: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:23]TEST
+[2017-09-08 15:56:41] DEBUG: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:24]TEST
+[2017-09-08 15:56:41] INFO: TEST
+[2017-09-08 15:56:41] WARN: TEST
+[2017-09-08 15:56:41] ERROR: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:27]TEST
+[2017-09-08 15:56:41] FATAL: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:28]TEST
+[2017-10-16 10:21:31] TRACE: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:22]TEST
+[2017-10-16 10:21:31] DEBUG: main.main[/Users/nghi/workspace/aainc/BTM/DEV/go_space/src/github.com/ngonghi/VyLog/examples/example.go:23]TEST
+[2017-10-16 10:21:31] INFO: TEST
+[2017-10-16 10:21:31] WARN: TEST
+[2017-10-16 10:21:31] ERROR: main.main: TEST
+[2017-10-16 10:21:31] FATAL: main.main: TEST
+[2017-10-18 11:44:00] TRACE: main.main: TEST
+[2017-10-18 11:44:00] DEBUG: main.main: TEST
+[2017-10-18 11:44:00] INFO: TEST
+[2017-10-18 11:44:00] WARN: TEST
+[2017-10-18 11:44:00] ERROR: &{{}}: TEST
+[2017-10-18 11:44:00] FATAL: github.com/ngonghi/VyLog.(*Vylog).Fatal: TEST
+[2017-10-18 11:45:05] TRACE: main.main: TEST
+[2017-10-18 11:45:05] DEBUG: main.main: TEST
+[2017-10-18 11:45:05] INFO: TEST
+[2017-10-18 11:45:05] WARN: TEST
+[2017-10-18 11:45:05] ERROR: main.main: TEST
+[2017-10-18 11:45:05] FATAL: github.com/ngonghi/VyLog.(*Vylog).Fatal: TEST
